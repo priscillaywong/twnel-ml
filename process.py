@@ -128,6 +128,8 @@ for message in messages.find():
 	skip.append("This could be the face")
 	#spanish pending messages
 	skip.append("conversaciones pendientes por atender. Ingrese como agente usando")
+	skip.append("En este momento hay una")
+	skip.append("esperando una respuesta de su empresa en este momento")
 
 
 	move_on = False
@@ -219,11 +221,18 @@ for message in messages.find():
 print "Processed chats:", number_chats
 final_counter = 0
 
+writer = csv.writer(open("messages.csv", "w"))
+
 for l in database:
 	l.sort(key=lambda x: x.timestamp)
 	l.sort(key=lambda x: x.customer)
 	for m in l:
 		fmessages.writerow([m.company, m.customer, m.timestamp, m.sender, m.receiver, change_text(m.message)])
+		if (m.company == m.sender):
+			writer.writerow(["Agent", change_text(m.message)])
+		elif (m.company == m.receiver):
+			writer.writerow(["Customer", change_text(m.message)])
+
 		final_counter += 1
 		if (final_counter % 50000 == 0):
 			print "Final Progress:", final_counter, "chats out of", number_chats, "processed chats."
