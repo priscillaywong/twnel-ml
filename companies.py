@@ -24,5 +24,5 @@ for c in companies.find():
 
 file.close()
 
-print ("There are", count, "companies in this list.")
-print ("There are", number, "company emails.")
+print "There are", count, "companies in this list."
+print "There are", number, "company emails."

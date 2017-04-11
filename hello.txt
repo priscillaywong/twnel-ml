@@ -1,3 +1,0 @@
-hi tc
-hi priscilla!
-i wrote this using my new vim knowledge!
